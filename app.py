@@ -1,10 +1,18 @@
 from flask import Flask
+from flask import request, jsonify
+
 app = Flask(__name__)
 
 
 @app.route('/')
 def hello():
     return "Hello There!!"
+
+@app.route('/api', methods=['POST'])
+def api():
+
+    data = request.get_json()
+    return data
 
 
 @app.route('/home')
