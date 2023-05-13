@@ -8,7 +8,7 @@ def hello():
 
 
 @app.route('/home')
-def hello():
+def home():
     return "Home api"
 
 @app.route('/bye')
