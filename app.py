@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
+    print(request.url)
     return "Hello There!!"
 
 @app.route('/api', methods=['POST'])
