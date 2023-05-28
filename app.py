@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    print(request.query_string)
+    print(request.args.get('energykey'))
     return "Hello There!!"
 
 @app.route('/api', methods=['POST'])
