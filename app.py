@@ -49,7 +49,8 @@ def hello():
     global stringVal, device_1_power,device_1_energy,device_2_power,device_2_energy,device_3_power,device_3_energy,device_4_power,device_4_energy,device_5_power,device_5_energy,device_6_power,device_6_energy,device_7_power,device_7_energy,device_8_power,device_8_energy,phase_1_voltage ,phase_2_voltage ,phase_3_voltage ,total_power ,total_solar_power ,solar_max_power ,solar_energy_today ,solar_energy_month ,dynamic_price_new ,dynamic_price_old ,dynamic_price_current ,energy_hour ,energy_day ,energy_month,cost_month,cost_day
     stringVal = request.args.get('energykey')
     print(stringVal)
-    device_1_power,device_1_energy,device_2_power,device_2_energy,device_3_power,device_3_energy,device_4_power,device_4_energy,device_5_power,device_5_energy,device_6_power,device_6_energy,device_7_power,device_7_energy,device_8_power,device_8_energy,phase_1_voltage,phase_2_voltage,phase_3_voltage,total_power,total_solar_power,solar_max_power,solar_energy_today,solar_energy_month,dynamic_price_new,dynamic_price_old,dynamic_price_current,energy_hour,energy_day,energy_month,cost_month, cost_day, _ = stringVal.split(' ')
+    if len(stringVal.split(' ')) > 1:
+        device_1_power,device_1_energy,device_2_power,device_2_energy,device_3_power,device_3_energy,device_4_power,device_4_energy,device_5_power,device_5_energy,device_6_power,device_6_energy,device_7_power,device_7_energy,device_8_power,device_8_energy,phase_1_voltage,phase_2_voltage,phase_3_voltage,total_power,total_solar_power,solar_max_power,solar_energy_today,solar_energy_month,dynamic_price_new,dynamic_price_old,dynamic_price_current,energy_hour,energy_day,energy_month,cost_month, cost_day, _ = stringVal.split(' ')
     return "Hello There!!"
 
 @app.route('/api', methods=['POST'])
