@@ -75,7 +75,7 @@ def create_bill_pdf(file_name, bill_data):
 
     # Create a table for the bill data
     data = [
-        ['Amount Due', 'Rs.{:.2f}'.format(bill_data['amount_due'])],
+        ['Amount Due', f'Rs: {bill_data["amount_due"]}'],
     ]
     table = Table(data, colWidths=[200, 200])
     table.setStyle(TableStyle([
