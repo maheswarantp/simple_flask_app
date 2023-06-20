@@ -7,101 +7,49 @@
     <title>Document</title>
 </head>
 <body>
-    <div>
-        <table>
-            <tr>
-              <th>Phase 1 Voltage</th>
-              <th>Phase 2 Voltage</th>
-              <th>Phase 3 Voltage</th>
-            </tr>
-            <tr>
-              <td>{{phase_1_voltage}}</td>
-              <td>{{phase_2_voltage}}</td>
-              <td>{{phase_3_voltage}}</td>
-            </tr>
-          </table>
-    </div>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
 
-    <div>
-        <table>
-        <tr>
-          <th>Total Power</th>
-          <th>Total Solar Power</th>
-          <th>Solar Max Power</th>
-        </tr>
-        <tr>
-          <td>{{total_power}}</td>
-          <td>{{total_solar_power}}</td>
-          <td>{{solar_max_power}}</td>
-        </tr>
-      </table>
+  <!-- max_power_this_minute, max_power, total_power, total_energy_hour, total_energy_day, total_energy_month, total_cost_hour, total_cost_day, total_cost_month, dynamic_price_current = stringVal.split(' ') -->
 
-      <br/>
-    <br/>
-    <br/>
-    <br/>
+   <table>
+    <tr>
+      <th>Max Power This Minute</th>
+      <th>Max Power</th>
+      <th>Total Power</th>
+    </tr>
+    <tr>
+      <th>{{max_power_this_minute}}</th>
+      <th>{{max_power}}</th>
+      <th>{{total_power}}</th>
+    </tr>
+   </table>
+   <table>
+    <tr>
+      <th>Total Energy Hour</th>
+      <th>Total Energy Day</th>
+      <th>Total Energy Month</th>
+    </tr>
+    <tr>
+      <th>{{total_energy_hour}}</th>
+      <th>{{total_energy_day}}</th>
+      <th>{{total_energy_month}}</th>
+    </tr>
+   </table>
+   <table>
+    <tr>
+      <th>Total Cost Hour</th>
+      <th>Total Cost Day</th>
+      <th>Total Cost Month</th>
+    </tr>
+    <tr>
+      <th>{{total_cost_hour}}</th>
+      <th>{{total_cost_day}}</th>
+      <th>{{total_cost_month}}</th>
+    </tr>
+   </table>
 
-    <div>
-        <table>
-        <tr>
-          <th>Solar Energy Today</th>
-          <th>Solar Energy Month</th>
-        </tr>
-        <tr>
-          <td>{{solar_energy_today}}</td>
-          <td>{{solar_energy_month}}</td>
-        </tr>
-      </table>
-    </div>
-
-    <br>
-    <br>
-    <br>
-    <table>
-        <tr>
-            <th>Daily Cost</th>
-            <th>Monthly Cost</th>
-        </tr>
-        <tr>
-            <td>{{cost_day}}</td>
-            <td>{{cost_month}}</td>
-        </tr>
-    </table>
-
-    <br>
-    <br>
-    <br>
-
-    <table>
-        <tr>
-            <th>Energy Hour</th>
-            <th>Energy day</th>
-            <th>Energy Month</th>
-        </tr>
-        <tr>
-            <td>{{energy_hour}}</td>
-            <td>{{energy_day}}</td>
-            <td>{{energy_month}}</td>
-        </tr>
-    </table>
-    <br>
-    <br>
-    <br>
-    <table>
-        <tr>
-          <th>Dynamic Price New</th>
-          <th>Dynamic Price Old</th>
-          <th>Dynamic Price Current</th>
-        </tr>
-        <tr>
-          <td>{{dynamic_price_new}}</td>
-          <td>{{dynamic_price_old}}</td>
-          <td>{{dynamic_price_current}}</td>
-        </tr>
-      </table>
+   <br>
+   <br>
+   <br>
+<h1>Dynamic Price Current: {{dynamic_price_current }}</h1>
 </body>
 </html>
