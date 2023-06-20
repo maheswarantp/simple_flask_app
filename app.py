@@ -1,8 +1,8 @@
 from flask import Flask, Response, render_template
 from flask import request, jsonify
 from flask_mail import Mail, Message
-import datetime
-from makePdf import bill_data
+from datetime import datetime, date
+from makePdf import create_bill_pdf
 
 
 app = Flask(__name__)
@@ -12,8 +12,8 @@ mail = Mail(app)
 # configuration of mail
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'mahestpm@gmail.com'
-app.config['MAIL_PASSWORD'] = 'xubuehmhsmuwslns'
+app.config['MAIL_USERNAME'] = 'accsharetemp@gmail.com'
+app.config['MAIL_PASSWORD'] = 'lwgpeaapizdwjyad'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -22,8 +22,8 @@ mail = Mail(app)
 def sendMail(path_to_pdf_file):
     msg = Message(
         'Here is your electricity bill',
-        sender ='mahestpm@gmail.com',
-        recipients = ['ssmtptest334@gmail.com']
+        sender ='accsharetemp@gmail.com',
+        recipients = ['benzinsajumanjally@gmail.com']
     )
     with open(path_to_pdf_file, 'rb') as f:
         msg.attach(filename='electricity_bill.pdf', content_type='application/pdf', data=f.read(), disposition=None, headers=None)
@@ -113,6 +113,27 @@ def home():
                         total_cost_month = total_cost_month,
                         dynamic_price_current = dynamic_price_current 
 )
+
+@app.route('/sendPdf')
+def sendPDF():
+    global stringVal, max_power_this_minute, max_power, total_power, total_energy_hour, total_energy_day, total_energy_month, total_cost_hour, total_cost_day, total_cost_month, dynamic_price_current
+ 
+    bill_data = {
+    'customer_name': 'FISAT',
+    'consumer_number': '1234567890',
+    'address': 'Hormis Nagar, Mookkannoor',
+    'month': datetime.now().month,
+    'amount_due': total_cost_month,
+    'energy': total_energy_month,
+    'bill_generated_on': date.today(),
+    'connected_load': max_power
+    }
+
+    create_bill_pdf('electricity_bill.pdf', bill_data)
+    sendMail('electricity_bill.pdf')
+    return 'sent'
+ 
+
 
 @app.route('/bye')
 def bye():
