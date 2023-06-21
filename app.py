@@ -127,7 +127,7 @@ def others():
     dynamic_price_next_minute = ((dynamic_price_max_value - dynamic_price_min_value)*(total_power / total_max_power)) + 5.00
 
 
-    dynamic_price_next_minute = 3
+    dynamic_price_next_minute = 7
     # Send to device 1 V6
     return str(sendGETRequestToBlynk(dynamic_price_next_minute))
     # Send Dynamic price next minute to blynk
