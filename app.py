@@ -2,8 +2,15 @@ from flask import Flask, Response, render_template
 from flask import request, jsonify
 from flask_mail import Mail, Message
 from datetime import datetime, date
+import requests
 from makePdf import create_bill_pdf
 
+
+# Send GET request to blynk function
+def sendGETRequestToBlynk(data):
+    r = requests.get(f'https://blynk.cloud/external/api/update?token=kRKtlHf1FBukKaMpoZYP0BAb6latFxGH&V6={data}')
+    print(r.status_code)
+    return r.status_code
 
 app = Flask(__name__)
 mail = Mail(app)
@@ -48,18 +55,17 @@ dynamic_price_current = 0
 # PDF made on a button click
 
 # Dynamic price code
-"""
 device_1_max_power = 0.01          
 device_2_max_power = 0.01           
 device_3_max_power = 0.01
 device_4_max_power = 0.01
 device_5_max_power = 0.01
 
-device_1_power = 0.01   #recieve power from Blynk device 1      # device_1_power from api
-device_2_power = 0.01   #recieve power from Blynk device 2      # recieve from another api
-device_3_power = 0.01   #recieve power from Blynk device 2      # recieve from another api
-device_4_power = 0.01   #recieve power from Blynk device 2      # recieve from another api
-device_5_power = 0.01   #recieve power from Blynk device 2      # recieve from another api
+device_1_power = 0.01               # max_power from /
+device_2_power = 0.01   
+device_3_power = 0.01   
+device_4_power = 0.01   
+device_5_power = 0.01   
 
 if device_1_power > device_1_max_power:
     device_1_max_power = device_1_power
@@ -82,7 +88,6 @@ dynamic_price_min_value = 5.00
 
 dynamic_price_next_minute = ((dynamic_price_max_value - dynamic_price_min_value)*(total_power / total_max_power)) + 5.00
 # dynamic price has to be pushed to Blynk every minute to which VPIN? ==> V6
-"""
 
 
 @app.route('/', methods=['GET'])
@@ -93,6 +98,37 @@ def hello():
     if len(stringVal.split(' ')) > 1:
         max_power_this_minute, max_power, total_power, total_energy_hour, total_energy_day, total_energy_month, total_cost_hour, total_cost_day, total_cost_month, dynamic_price_current = stringVal.split(' ')
     return "Hello There!!"
+
+
+@app.route('/otherDevices', methods=['GET'])
+def others():
+    global max_power, device_1_max_power, device_2_max_power, device_3_max_power, device_4_max_power, device_5_max_power, device_2_power, device_3_power, device_4_power, device_5_power
+    device_1_power = max_power
+        
+    if device_1_power > device_1_max_power:
+        device_1_max_power = device_1_power
+    if device_2_power > device_2_max_power:
+        device_2_max_power = device_2_power
+    if device_3_power > device_3_max_power:
+        device_3_max_power = device_3_power
+    if device_4_power > device_4_max_power:
+        device_4_max_power = device_4_power
+    if device_5_power > device_5_max_power:
+        device_5_max_power = device_5_power
+    
+    
+    total_power = device_1_power + device_2_power + device_3_power + device_4_power + device_5_power
+    total_max_power = device_1_max_power + device_2_max_power + device_3_max_power + device_4_max_power + device_5_max_power
+
+    
+    dynamic_price_max_value = 10.00
+    dynamic_price_min_value = 5.00
+
+    dynamic_price_next_minute = ((dynamic_price_max_value - dynamic_price_min_value)*(total_power / total_max_power)) + 5.00
+
+    # Send to device 1 V6
+    return sendGETRequestToBlynk(dynamic_price_next_minute)
+    # Send Dynamic price next minute to blynk
 
 @app.route('/api', methods=['POST'])
 def api():
