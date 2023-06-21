@@ -106,13 +106,13 @@ def hello():
 @app.route('/otherDevices', methods=['GET'])
 def others():
     global stringVal2, max_power, device_1_max_power, device_2_max_power, device_3_max_power, device_4_max_power, device_5_max_power, device_2_power, device_3_power, device_4_power, device_5_power, device_6_power, device_6_max_power
-    device_1_power = int(max_power)
+    device_1_power = float(max_power)
     
     stringVal2 = request.args.get('energykey')
     print(f"StringVal2: {stringVal2}")
 
     if len(stringVal2.split(' ')) > 1:
-        device_2_power, device_3_power, device_4_power, device_5_power, device_6_power = [int(i) for i in stringVal2.split(' ')]
+        device_2_power, device_3_power, device_4_power, device_5_power, device_6_power = [float(i) for i in stringVal2.split(' ')]
 
     if device_1_power > device_1_max_power:
         device_1_max_power = device_1_power
