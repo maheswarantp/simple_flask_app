@@ -38,7 +38,8 @@ def sendMail(path_to_pdf_file):
     mail.send(msg)
     return 'sent'
 
-stringVal = ""
+stringVal1 = ""
+stringVal2 = ""
 # Show this on server
 
 max_power_this_minute = 0
@@ -54,57 +55,65 @@ dynamic_price_current = 0
 
 # PDF made on a button click
 
-# Dynamic price code
+# # Dynamic price code
 device_1_max_power = 0.01          
 device_2_max_power = 0.01           
 device_3_max_power = 0.01
 device_4_max_power = 0.01
 device_5_max_power = 0.01
+device_6_max_power = 0.01
 
 device_1_power = 0.01               # max_power from /
 device_2_power = 0.01   
 device_3_power = 0.01   
 device_4_power = 0.01   
 device_5_power = 0.01   
+device_6_power = 0.01
 
-if device_1_power > device_1_max_power:
-    device_1_max_power = device_1_power
-if device_2_power > device_2_max_power:
-    device_2_max_power = device_2_power
-if device_3_power > device_3_max_power:
-    device_3_max_power = device_3_power
-if device_4_power > device_4_max_power:
-    device_4_max_power = device_4_power
-if device_5_power > device_5_max_power:
-    device_5_max_power = device_5_power
+# if device_1_power > device_1_max_power:
+#     device_1_max_power = device_1_power
+# if device_2_power > device_2_max_power:
+#     device_2_max_power = device_2_power
+# if device_3_power > device_3_max_power:
+#     device_3_max_power = device_3_power
+# if device_4_power > device_4_max_power:
+#     device_4_max_power = device_4_power
+# if device_5_power > device_5_max_power:
+#     device_5_max_power = device_5_power
 
 
 
-total_power = device_1_power + device_2_power + device_3_power + device_4_power + device_5_power
-total_max_power = device_1_max_power + device_2_max_power + device_3_max_power + device_4_max_power + device_5_max_power
+# total_power = device_1_power + device_2_power + device_3_power + device_4_power + device_5_power
+# total_max_power = device_1_max_power + device_2_max_power + device_3_max_power + device_4_max_power + device_5_max_power
 
-dynamic_price_max_value = 10.00
-dynamic_price_min_value = 5.00
+# dynamic_price_max_value = 10.00
+# dynamic_price_min_value = 5.00
 
-dynamic_price_next_minute = ((dynamic_price_max_value - dynamic_price_min_value)*(total_power / total_max_power)) + 5.00
+# dynamic_price_next_minute = ((dynamic_price_max_value - dynamic_price_min_value)*(total_power / total_max_power)) + 5.00
 # dynamic price has to be pushed to Blynk every minute to which VPIN? ==> V6
 
 
 @app.route('/', methods=['GET'])
 def hello():
-    global stringVal, max_power_this_minute, max_power, total_power, total_energy_hour, total_energy_day, total_energy_month, total_cost_hour, total_cost_day, total_cost_month, dynamic_price_current
-    stringVal = request.args.get('energykey')
-    print(stringVal)
-    if len(stringVal.split(' ')) > 1:
-        max_power_this_minute, max_power, total_power, total_energy_hour, total_energy_day, total_energy_month, total_cost_hour, total_cost_day, total_cost_month, dynamic_price_current = stringVal.split(' ')
+    global stringVal1, max_power_this_minute, max_power, total_power, total_energy_hour, total_energy_day, total_energy_month, total_cost_hour, total_cost_day, total_cost_month, dynamic_price_current
+    stringVal1 = request.args.get('energykey')
+    print(f"StringVal1: {stringVal1}")
+    if len(stringVal1.split(' ')) > 1:
+        max_power_this_minute, max_power, total_power, total_energy_hour, total_energy_day, total_energy_month, total_cost_hour, total_cost_day, total_cost_month, dynamic_price_current = stringVal1.split(' ')
     return "Hello There!!"
 
 
 @app.route('/otherDevices', methods=['GET'])
 def others():
-    global max_power, device_1_max_power, device_2_max_power, device_3_max_power, device_4_max_power, device_5_max_power, device_2_power, device_3_power, device_4_power, device_5_power
+    global stringVal2, max_power, device_1_max_power, device_2_max_power, device_3_max_power, device_4_max_power, device_5_max_power, device_2_power, device_3_power, device_4_power, device_5_power, device_6_power, device_6_max_power
     device_1_power = max_power
-        
+    
+    stringVal2 = request.args.get('energykey')
+    print(f"StringVal2: {stringVal2}")
+
+    if len(stringVal2.split(' ')) > 1:
+        device_2_power, device_3_power, device_4_power, device_5_power, 
+
     if device_1_power > device_1_max_power:
         device_1_max_power = device_1_power
     if device_2_power > device_2_max_power:
@@ -115,19 +124,19 @@ def others():
         device_4_max_power = device_4_power
     if device_5_power > device_5_max_power:
         device_5_max_power = device_5_power
+    if device_6_power > device_6_max_power:
+        device_6_max_power = device_6_power
     
-    
-    total_power = device_1_power + device_2_power + device_3_power + device_4_power + device_5_power
-    total_max_power = device_1_max_power + device_2_max_power + device_3_max_power + device_4_max_power + device_5_max_power
+    total_power = device_1_power + device_2_power + device_3_power + device_4_power + device_5_power + device_6_power
+    total_max_power = device_1_max_power + device_2_max_power + device_3_max_power + device_4_max_power + device_5_max_power + device_6_max_power
 
-    
     dynamic_price_max_value = 10.00
     dynamic_price_min_value = 5.00
 
     dynamic_price_next_minute = ((dynamic_price_max_value - dynamic_price_min_value)*(total_power / total_max_power)) + 5.00
+    
 
-
-    dynamic_price_next_minute = 7
+    # dynamic_price_next_minute = 7
     # Send to device 1 V6
     return str(sendGETRequestToBlynk(dynamic_price_next_minute))
     # Send Dynamic price next minute to blynk
