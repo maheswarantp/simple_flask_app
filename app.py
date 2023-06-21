@@ -112,7 +112,7 @@ def others():
     print(f"StringVal2: {stringVal2}")
 
     if len(stringVal2.split(' ')) > 1:
-        device_2_power, device_3_power, device_4_power, device_5_power, 
+        device_2_power, device_3_power, device_4_power, device_5_power, device_6_power = [int(i) for i in stringVal2.split(' ')]
 
     if device_1_power > device_1_max_power:
         device_1_max_power = device_1_power
