@@ -4,53 +4,126 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Electricity Admin Panel</title>
+    <style>
+      .table-class {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 500px;
+      }
+      .styled-table {
+          border-collapse: collapse;
+          margin: 25px;
+          font-size: 0.9em;
+          font-family: sans-serif;
+          min-width: 400px;
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .styled-table thead tr {
+          background-color: #009879;
+          color: #ffffff;
+          text-align: left;
+      }
+
+      .styled-table th,
+      .styled-table td {
+          padding: 12px 15px;
+      }
+
+      .styled-table tbody tr {
+      border-bottom: 1px solid #dddddd;
+      }
+
+      .styled-table tbody tr:nth-of-type(even) {
+          background-color: #f3f3f3;
+      }
+
+      .styled-table tbody tr:last-of-type {
+          border-bottom: 2px solid #009879;
+      }
+
+      .styled-table tbody tr:hover {
+          font-weight: bold;
+          color: #009879;
+      }
+      .heading-class {
+        display: flex;
+        justify-content: center;
+      }
+
+      .heading-class h1 {
+        font-size: 3rem;
+      }
+      .heading-class h1 span {
+        color: #009879;
+        font-weight: bold;
+      }
+      /* .styled-table tbody tr.active-row {
+      
+      } */
+  </style>
 </head>
 <body>
 
   <!-- max_power_this_minute, max_power, total_power, total_energy_hour, total_energy_day, total_energy_month, total_cost_hour, total_cost_day, total_cost_month, dynamic_price_current = stringVal.split(' ') -->
-
-   <table>
-    <tr>
-      <th>Max Power This Minute</th>
-      <th>Max Power</th>
-      <th>Total Power</th>
-    </tr>
-    <tr>
-      <th>{{max_power_this_minute}}</th>
-      <th>{{max_power}}</th>
-      <th>{{total_power}}</th>
-    </tr>
-   </table>
-   <table>
-    <tr>
-      <th>Total Energy Hour</th>
-      <th>Total Energy Day</th>
-      <th>Total Energy Month</th>
-    </tr>
-    <tr>
-      <th>{{total_energy_hour}}</th>
-      <th>{{total_energy_day}}</th>
-      <th>{{total_energy_month}}</th>
-    </tr>
-   </table>
-   <table>
-    <tr>
-      <th>Total Cost Hour</th>
-      <th>Total Cost Day</th>
-      <th>Total Cost Month</th>
-    </tr>
-    <tr>
-      <th>{{total_cost_hour}}</th>
-      <th>{{total_cost_day}}</th>
-      <th>{{total_cost_month}}</th>
-    </tr>
-   </table>
-
+  <div class="table-class">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Max Power This Minute</th>
+          <th>Max Power</th>
+          <th>Total Power</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>{{max_power_this_minute}}</th>
+          <th>{{max_power}}</th>
+          <th>{{total_power}}</th>
+        </tr>
+      </tbody>
+    </table>
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Total Energy Hour</th>
+          <th>Total Energy Day</th>
+          <th>Total Energy Month</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>{{total_energy_hour}}</th>
+          <th>{{total_energy_day}}</th>
+          <th>{{total_energy_month}}</th>
+        </tr>
+      </tbody>
+    </table>
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Total Cost Hour</th>
+          <th>Total Cost Day</th>
+          <th>Total Cost Month</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>{{total_cost_hour}}</th>
+          <th>{{total_cost_day}}</th>
+          <th>{{total_cost_month}}</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="heading-class">
+    <h1>Dynamic Price Current: <span>{{dynamic_price_current}}</span></h1>
+  </div>
    <br>
    <br>
    <br>
-<h1>Dynamic Price Current: {{dynamic_price_current }}</h1>
 
 
 <form action="/sendPdf">
