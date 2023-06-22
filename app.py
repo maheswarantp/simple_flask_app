@@ -137,11 +137,11 @@ def others():
     dynamic_price_min_value = 6.2
 
     dynamic_price_next_minute = ((dynamic_price_max_value - dynamic_price_min_value)*(total_power_both / total_max_power)) + 5.00
-    print(dynamic_price_next_minute)
+    print(max(dynamic_price_next_minute, dynamic_price_min_value))
 
     # dynamic_price_next_minute = 7
     # Send to device 1 V6
-    return str(sendGETRequestToBlynk(dynamic_price_next_minute))
+    return str(sendGETRequestToBlynk(max(dynamic_price_next_minute,dynamic_price_min_value)))
     # Send Dynamic price next minute to blynk
 
 @app.route('/api', methods=['POST'])
