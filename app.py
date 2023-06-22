@@ -110,6 +110,7 @@ def hello():
 def others():
     global dynamic_price_next_minute, total_power_both, stringVal2, max_power, device_1_max_power, device_2_max_power, device_3_max_power, device_4_max_power, device_5_max_power, device_2_power, device_3_power, device_4_power, device_5_power, device_6_power, device_6_max_power
     device_1_power = float(total_power)
+    device_1_max_power = float(max_power);
     
     stringVal2 = request.args.get('energykey')
     print(f"StringVal2: {stringVal2}")
