@@ -133,8 +133,8 @@ def others():
     total_power_both = device_1_power + device_2_power + device_3_power + device_4_power + device_5_power + device_6_power
     total_max_power = device_1_max_power + device_2_max_power + device_3_max_power + device_4_max_power + device_5_max_power + device_6_max_power
 
-    dynamic_price_max_value = 10.00
-    dynamic_price_min_value = 5.00
+    dynamic_price_max_value = 11.50
+    dynamic_price_min_value = 6.2
 
     dynamic_price_next_minute = ((dynamic_price_max_value - dynamic_price_min_value)*(total_power_both / total_max_power)) + 5.00
     print(dynamic_price_next_minute)
