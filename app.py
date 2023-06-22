@@ -52,7 +52,7 @@ total_cost_hour = 0
 total_cost_day = 0
 total_cost_month = 0                # to pdf amount?
 dynamic_price_current = 0
-
+dynamic_price_next_minute = 0
 # PDF made on a button click
 
 # # Dynamic price code
@@ -108,7 +108,7 @@ def hello():
 
 @app.route('/otherDevices', methods=['GET'])
 def others():
-    global total_power_both, stringVal2, max_power, device_1_max_power, device_2_max_power, device_3_max_power, device_4_max_power, device_5_max_power, device_2_power, device_3_power, device_4_power, device_5_power, device_6_power, device_6_max_power
+    global dynamic_price_next_minute, total_power_both, stringVal2, max_power, device_1_max_power, device_2_max_power, device_3_max_power, device_4_max_power, device_5_max_power, device_2_power, device_3_power, device_4_power, device_5_power, device_6_power, device_6_max_power
     device_1_power = float(total_power)
     
     stringVal2 = request.args.get('energykey')
@@ -161,7 +161,7 @@ def home():
                         total_cost_day = total_cost_day,
                         total_cost_hour = total_cost_hour,
                         total_cost_month = total_cost_month,
-                        dynamic_price_current = dynamic_price_current,
+                        dynamic_price_current = str(max(6.2, dynamic_price_next_minute)),
                         total_power_both = total_power_both
 )
 
