@@ -137,6 +137,7 @@ def others():
     dynamic_price_min_value = 6.2
 
     dynamic_price_next_minute = ((dynamic_price_max_value - dynamic_price_min_value)*(total_power_both / total_max_power)) + 6.2
+    dynamic_price_next_minute = round(dynamic_price_next_minute,2)
     print(max(dynamic_price_next_minute, dynamic_price_min_value))
 
     # dynamic_price_next_minute = 7
