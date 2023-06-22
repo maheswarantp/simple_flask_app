@@ -8,7 +8,7 @@ from reportlab.platypus.flowables import HRFlowable
 
 now = datetime.now()
 dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-month_now = now.strftime("%m / %Y")
+month_now = String(now.strftime("%m")) + "/" + String(now.strftime("%Y"))
 amount_due = 1150.45
 energy_this_month = 152
 connected_load = 5000
