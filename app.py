@@ -70,6 +70,9 @@ device_4_power = 0.01
 device_5_power = 0.01   
 device_6_power = 0.01
 
+
+total_power_both = 0.00
+
 # if device_1_power > device_1_max_power:
 #     device_1_max_power = device_1_power
 # if device_2_power > device_2_max_power:
@@ -105,7 +108,7 @@ def hello():
 
 @app.route('/otherDevices', methods=['GET'])
 def others():
-    global stringVal2, max_power, device_1_max_power, device_2_max_power, device_3_max_power, device_4_max_power, device_5_max_power, device_2_power, device_3_power, device_4_power, device_5_power, device_6_power, device_6_max_power
+    global total_power_both, stringVal2, max_power, device_1_max_power, device_2_max_power, device_3_max_power, device_4_max_power, device_5_max_power, device_2_power, device_3_power, device_4_power, device_5_power, device_6_power, device_6_max_power
     device_1_power = float(max_power)
     
     stringVal2 = request.args.get('energykey')
@@ -127,13 +130,13 @@ def others():
     if device_6_power > device_6_max_power:
         device_6_max_power = device_6_power
     
-    total_power = device_1_power + device_2_power + device_3_power + device_4_power + device_5_power + device_6_power
+    total_power_both = device_1_power + device_2_power + device_3_power + device_4_power + device_5_power + device_6_power
     total_max_power = device_1_max_power + device_2_max_power + device_3_max_power + device_4_max_power + device_5_max_power + device_6_max_power
 
     dynamic_price_max_value = 10.00
     dynamic_price_min_value = 5.00
 
-    dynamic_price_next_minute = ((dynamic_price_max_value - dynamic_price_min_value)*(total_power / total_max_power)) + 5.00
+    dynamic_price_next_minute = ((dynamic_price_max_value - dynamic_price_min_value)*(total_power_both / total_max_power)) + 5.00
     print(dynamic_price_next_minute)
 
     # dynamic_price_next_minute = 7
@@ -158,7 +161,8 @@ def home():
                         total_cost_day = total_cost_day,
                         total_cost_hour = total_cost_hour,
                         total_cost_month = total_cost_month,
-                        dynamic_price_current = dynamic_price_current 
+                        dynamic_price_current = dynamic_price_current,
+                        total_power_both = total_power_both
 )
 
 @app.route('/sendPdf')

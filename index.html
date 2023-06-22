@@ -55,6 +55,24 @@
         .H1Div h1 {
             font-size: 4rem;
         }
+        .button-class {
+            display: flex;
+            justify-content: center;
+        }
+        .button-class .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
+
+      .button-class .button:hover {
+        background-color: #009879;
+    }
         /* .styled-table tbody tr.active-row {
         
         } */
@@ -119,14 +137,17 @@
                 <!-- and so on... -->
             </tbody>
         </table>
-        <br>
-        <br>
-        <br>
     </div>
     <div class="H1Div">
         <h1>Hello World!!!</h1>
     </div>
-
+    <div class="button-class">
+        <form action="/sendPdf">
+          <button class="button" name="sendPdfButton" type="submit">
+            Send PDF
+          </button>
+        </form>
+      </div>
     <script>
 
 
